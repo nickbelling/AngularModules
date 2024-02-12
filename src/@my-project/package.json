@@ -1,0 +1,18 @@
+{
+  "name": "my-project-workspace",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "build-plugin": "cd ../plugin/plugin && npm run build && cd ../../@my-project",
+    "serve-python": "cd dist/@my-project/main/browser/ && python3 -m http.server 8000"
+  },
+  "private": true,
+  "workspaces": [
+    "main",
+    "shared"
+  ]
+}

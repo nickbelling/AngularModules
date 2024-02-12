@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+@include mat.core();
+
+// Define your color palettes
+$primary-palette: mat.define-palette(mat.$indigo-palette);
+$accent-palette: mat.define-palette(mat.$pink-palette);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+// Define a typography configuration
+$typography-config: mat.define-typography-config($font-family: 'Roboto, sans-serif');
+
+// Create the theme
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: $typography-config,
+));
+
+@include mat.all-component-themes($theme);
+@include mat.all-component-typographies($theme);
