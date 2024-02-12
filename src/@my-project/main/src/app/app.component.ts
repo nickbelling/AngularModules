@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, ElementRef, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SharedComponent } from '@my-project/shared';
+//import { SharedComponent } from '@my-project/shared';
 import { MatCardModule } from '@angular/material/card';
 import { loadRemoteModule } from '@angular-architects/native-federation';
 
@@ -9,7 +9,7 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
   standalone: true,
   imports: [
     RouterOutlet,
-    SharedComponent,
+    //SharedComponent,
     MatCardModule
   ],
   templateUrl: './app.component.html',

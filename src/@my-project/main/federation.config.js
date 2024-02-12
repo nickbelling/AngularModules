@@ -20,7 +20,7 @@ module.exports = withNativeFederation({
   //   'tslib': STANDARD_OPTIONS,
   //   //'@my-project/shared': STANDARD_OPTIONS
   // }),
-    ...shareAll({ singleton: true, eager: true }),
+    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
   },
 
   skip: []
