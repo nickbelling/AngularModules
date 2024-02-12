@@ -17,7 +17,7 @@
         "es-module-shims": "^1.5.12",
         "rxjs": "~7.8.0",
         "zone.js": "~0.14.3",
-        "@my-project/shared": "*"
+        "@my-project/shared": "0.0.1"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^17.1.3",

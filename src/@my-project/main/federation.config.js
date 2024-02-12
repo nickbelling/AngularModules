@@ -1,27 +1,21 @@
-const { withNativeFederation, shareAll, share } = require('@angular-architects/native-federation/config');
+const { withNativeFederation, share } = require('@angular-architects/native-federation/config');
 
-const STANDARD_OPTIONS = { singleton: true, eager: true };
+const STANDARD_OPTIONS = { singleton: true, strictVersion: false };
 
 module.exports = withNativeFederation({
-
-  shared: {
-  // shared: share({
-  //   '@angular/core': STANDARD_OPTIONS,
-  //   '@angular/animations': STANDARD_OPTIONS,
-  //   '@angular/cdk': STANDARD_OPTIONS,
-  //   '@angular/common': STANDARD_OPTIONS,
-  //   '@angular/compiler': STANDARD_OPTIONS,
-  //   '@angular/forms': STANDARD_OPTIONS,
-  //   '@angular/material': STANDARD_OPTIONS,
-  //   '@angular/platform-browser': STANDARD_OPTIONS,
-  //   '@angular/platform-browser-dynamic': STANDARD_OPTIONS,
-  //   '@angular/router': STANDARD_OPTIONS,
-  //   'rxjs': STANDARD_OPTIONS,
-  //   'tslib': STANDARD_OPTIONS,
-  //   //'@my-project/shared': STANDARD_OPTIONS
-  // }),
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-  },
-
+  // shared: {
+  //   ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+  // },
+  shared: share({
+    '@angular/core': STANDARD_OPTIONS,
+    '@angular/common': STANDARD_OPTIONS,
+    '@angular/forms': STANDARD_OPTIONS,
+    '@angular/cdk': STANDARD_OPTIONS,
+    '@angular/material': STANDARD_OPTIONS,
+    '@my-project/shared': STANDARD_OPTIONS,
+    'rxjs': STANDARD_OPTIONS,
+    'tslib': STANDARD_OPTIONS
+  }),
   skip: []
-});
+  }
+);

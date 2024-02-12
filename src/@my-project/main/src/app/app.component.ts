@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, ElementRef, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-//import { SharedComponent } from '@my-project/shared';
+import { SharedComponent } from '@my-project/shared';
 import { MatCardModule } from '@angular/material/card';
 import { loadRemoteModule } from '@angular-architects/native-federation';
 
@@ -9,7 +9,7 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
   standalone: true,
   imports: [
     RouterOutlet,
-    //SharedComponent,
+    SharedComponent,
     MatCardModule
   ],
   templateUrl: './app.component.html',
@@ -27,13 +27,13 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     console.log('loading!');
-    // const loadedModule = await loadRemoteModule('plugin', './Component');
-    // console.log('Loaded module:', loadedModule);
-    // if (loadedModule.AppComponent) {
-    //   this.pluginContainerRef.clear();
-    //   this.pluginContainerRef.createComponent(loadedModule.AppComponent);
-    // } else {
-    //   console.error('Nope :(');
-    // }
+    const loadedModule = await loadRemoteModule('plugin', './Component');
+    console.log('Loaded module:', loadedModule);
+    if (loadedModule.AppComponent) {
+      this.pluginContainerRef.clear();
+      this.pluginContainerRef.createComponent(loadedModule.AppComponent);
+    } else {
+      console.error('Nope :(');
+    }
   }
 }
