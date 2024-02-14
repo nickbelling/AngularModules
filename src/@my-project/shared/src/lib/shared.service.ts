@@ -5,5 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
 
-  constructor() { }
+  public counter: number = 0;
+
+  constructor() {
+    console.log('Initializing Shared Service, again!');
+  }
+
+  public increment() {
+    this.counter++;
+  }
 }

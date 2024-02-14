@@ -85,11 +85,12 @@
 					},
 					"configurations": {
 						"production": {
+							"optimization": false,
 							"budgets": [
 								{
 									"type": "initial",
 									"maximumWarning": "500kb",
-									"maximumError": "1mb"
+									"maximumError": "5mb"
 								},
 								{
 									"type": "anyComponentStyle",
@@ -102,7 +103,8 @@
 						"development": {
 							"optimization": false,
 							"extractLicenses": false,
-							"sourceMap": true
+							"sourceMap": true,
+							"namedChunks": true
 						}
 					},
 					"defaultConfiguration": "production"

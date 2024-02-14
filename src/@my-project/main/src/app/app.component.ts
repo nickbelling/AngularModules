@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ElementRef, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SharedComponent } from '@my-project/shared';
 import { MatCardModule } from '@angular/material/card';
@@ -27,6 +27,10 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     console.log('loading!');
+    await this.loadModule();
+  }
+
+  async loadModule() {
     const loadedModule = await loadRemoteModule('plugin', './Component');
     console.log('Loaded module:', loadedModule);
     if (loadedModule.AppComponent) {

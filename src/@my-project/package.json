@@ -1,18 +1,28 @@
 {
   "name": "my-project-workspace",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-plugin": "cd ../plugin/plugin && npm run build && cd ../../@my-project",
+    "link-shared": "cd ./dist/@my-project/shared && npm link && cd ./../../../../plugin/plugin && npm link @my-project/shared",
+    "link-build": "cd ./dist/@my-project/build && npm link && cd ./../../../../plugin/plugin && npm link @my-project/build",
+    "link": "npm run link-build && npm run link-shared",
+    "build-plugin": "npm run link && cd ../plugin/plugin && npm run build && cd ../../@my-project",
     "serve-python": "cd dist/@my-project/main/browser/ && python3 -m http.server 8000"
   },
   "private": true,
   "workspaces": [
     "main",
-    "shared"
-  ]
+    "shared",
+    "build"
+  ],
+  "dependencies": {
+    "@my-project/shared": "0.0.1"
+  },
+  "devDependencies": {
+    "@my-project/build": "0.0.1"
+  }
 }

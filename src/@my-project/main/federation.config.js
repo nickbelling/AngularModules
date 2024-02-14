@@ -1,21 +1,9 @@
-const { withNativeFederation, share } = require('@angular-architects/native-federation/config');
-
-const STANDARD_OPTIONS = { singleton: true, strictVersion: false };
+const { withNativeFederation } = require('@angular-architects/native-federation/config');
+const { STANDARD_SHARED_MODULES, SHARED_MAPPINGS } = require('@my-project/build');
 
 module.exports = withNativeFederation({
-  // shared: {
-  //   ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-  // },
-  shared: share({
-    '@angular/core': STANDARD_OPTIONS,
-    '@angular/common': STANDARD_OPTIONS,
-    '@angular/forms': STANDARD_OPTIONS,
-    '@angular/cdk': STANDARD_OPTIONS,
-    '@angular/material': STANDARD_OPTIONS,
-    '@my-project/shared': STANDARD_OPTIONS,
-    'rxjs': STANDARD_OPTIONS,
-    'tslib': STANDARD_OPTIONS
-  }),
-  skip: []
-  }
-);
+  name: 'main-app',
+  shared: STANDARD_SHARED_MODULES,
+  skip: [],
+  sharedMappings: SHARED_MAPPINGS
+});
