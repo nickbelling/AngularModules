@@ -1,6 +1,13 @@
 {
   "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../dist/@my-project/shared",
+  "allowedNonPeerDependencies": [
+    "@angular*",
+    "es-module-shims",
+    "rxjs",
+    "tslib",
+    "zone.js"
+  ],
   "lib": {
     "entryFile": "./src/public-api.ts"
   }

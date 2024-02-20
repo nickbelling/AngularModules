@@ -16,7 +16,9 @@
 			"architect": {
 				"build": {
 					"builder": "@angular-architects/native-federation:build",
-					"options": {},
+					"options": {
+						"skipHtmlTransform": true
+					},
 					"configurations": {
 						"production": {
 							"target": "plugin:esbuild:production"

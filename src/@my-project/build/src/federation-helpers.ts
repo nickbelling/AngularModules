@@ -1,10 +1,29 @@
 import { share } from '@softarc/native-federation/build';
 
+const ANGULAR_VERSION: string = '^17.1.0';
+const RXJS_VERSION: string = '^7.8.0';
+const MYPROJECT_VERSION: string = "0.0.1";
+
 // @softarc/native-federation doesn't export its config type,
 // so we pull it from the parameters of the imported "share" method
 type Config = Parameters<typeof share>[0];
+interface ConfigObject {
+    singleton: boolean;
+    strictVersion: boolean;
+    requiredVersion?: string;
+    eager?: boolean;
+    pinned?: boolean;
+    version?: string;
+};
 
-const STANDARD_OPTIONS = { singleton: true, strictVersion: true, eager: true, pinned: true };
+// This will be copied to every 
+const STANDARD_OPTIONS: ConfigObject = {
+    singleton: true,
+    strictVersion: true,
+    requiredVersion: 'auto',
+    eager: true,
+    pinned: true
+};
 
 const SHARED_PACKAGE_NAMES = [
     '@angular/animations',
@@ -15,19 +34,52 @@ const SHARED_PACKAGE_NAMES = [
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/cdk',
+    '@angular/cdk-experimental',
     '@angular/material',
+    '@angular/material-experimental',
     '@angular/router',
     '@my-project/shared',
     'rxjs',
     'tslib'
 ];
 
+const SHARED_VERSIONS: {[key: string]: string} = {
+    '@angular/': ANGULAR_VERSION,
+    'rxjs': RXJS_VERSION,
+    '@my-project/shared': MYPROJECT_VERSION
+};
+
+/**
+ * Builds the object that native federation expects to be passed as its "shared" configuration, for example:
+ *  shared: share({
+ *    '@angular/core': { singleton: true, strictVersion: true, requiredVersion: ANGULAR_VERSION },
+ *    '@angular/common': { singleton: true, strictVersion: true, requiredVersion: ANGULAR_VERSION },
+ *    // etc
+ *  })
+ */
 export const STANDARD_SHARED_MODULES: Config = share(SHARED_PACKAGE_NAMES.reduce(
-    (obj: any, packageName: string) => {
-        obj[packageName] = {...STANDARD_OPTIONS};
+    (obj: any, packageName: string, currentIndex: number) => {
+        const options: ConfigObject = { ...STANDARD_OPTIONS };
+        options.requiredVersion = getSpecifiedVersion(packageName);
+        options.version = getSpecifiedVersion(packageName);
+        obj[packageName] = options;
+
+        if (currentIndex == (SHARED_PACKAGE_NAMES.length - 1)) {
+            //console.log(obj);
+        }
         return obj;
     }, {} as Config)
 );
+
+function getSpecifiedVersion(packageName: string): string | undefined {
+    let requiredVersion: string | undefined = undefined;
+    Object.keys(SHARED_VERSIONS).forEach((key: string) => {
+        if (packageName.startsWith(key)) {
+            requiredVersion = SHARED_VERSIONS[key];
+        }
+    });
+    return requiredVersion;
+}
 
 const SHARED_MAPPINGS_ANGULAR: string[] = [
     '@angular/animations',
@@ -36,7 +88,7 @@ const SHARED_MAPPINGS_ANGULAR: string[] = [
     '@angular/common/http',
     '@angular/core',
     '@angular/core/primitives/signals',
-    '@angular/core/rxjs/interop',
+    '@angular/core/rxjs-interop',
     '@angular/compiler',
     '@angular/forms',
     '@angular/router',
@@ -115,12 +167,16 @@ const SHARED_MAPPINGS_ANGULAR_MATERIAL: string[] = [
     '@angular/material/tabs',
     '@angular/material/toolbar',
     '@angular/material/tooltip',
-    '@angular/material/tree'
+    '@angular/material/tree',
+    '@angular/material-experimental',
+    '@angular/material-experimental/column-resize',
+    '@angular/material-experimental/menubar',
+    '@angular/material-experimental/popover-edit',
+    '@angular/material-experimental/selection'
 ];
 
 export const SHARED_MAPPINGS: string[] = [
     '@my-project/shared',
-    '@my-project/shared/build',
     ...SHARED_MAPPINGS_ANGULAR,
     ...SHARED_MAPPINGS_ANGULAR_CDK,
     ...SHARED_MAPPINGS_ANGULAR_MATERIAL

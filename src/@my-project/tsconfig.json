@@ -5,9 +5,6 @@
     "paths": {
       "@my-project/shared": [
         "./dist/@my-project/shared"
-      ],
-      "@my-project/build": [
-        "./dist/@my-project/build"
       ]
     },
     "outDir": "./dist/out-tsc",

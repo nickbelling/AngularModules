@@ -16,7 +16,9 @@
 			"architect": {
 				"build": {
 					"builder": "@angular-architects/native-federation:build",
-					"options": {},
+					"options": {
+						"verbose": true
+					},
 					"configurations": {
 						"production": {
 							"target": "@my-project/main:esbuild:production"
