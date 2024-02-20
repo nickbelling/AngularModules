@@ -8,4 +8,6 @@ const config = withNativeFederation({
   sharedMappings: SHARED_MAPPINGS
 });
 
+console.log(config);
+
 module.exports = config;
