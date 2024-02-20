@@ -7,9 +7,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "link-shared": "cd ./dist/@my-project/shared && npm link",
-    "link-build": "cd ./dist/@my-project/build && npm link",
-    "link": "npm run link-build && npm run link-shared && cd ./../plugin/plugin && npm link @my-project/shared @my-project/build",
-    "build:tools": "cd ./build && npm run build",
+    "link": "npm run link-shared && cd ./../plugin/plugin && npm link @my-project/shared",
     "build:main": "ng build @my-project/main",
     "build:shared": "ng build @my-project/shared",
     "build:plugin": "npm run link && cd ./../plugin/plugin && npm run build",
@@ -18,8 +16,7 @@
   "private": true,
   "workspaces": [
     "main",
-    "shared",
-    "build"
+    "shared"
   ],
   "dependencies": {
     "@angular-architects/native-federation": "^17.1.6",

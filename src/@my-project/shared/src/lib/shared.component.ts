@@ -9,7 +9,7 @@ import { SharedService } from './shared.service';
   template: `
     <p>
       Look at that! A shared component!
-      Counter: {{service.counter}} (<a (click)="service.increment()">Click to increment</a>)
+      Counter: {{service.counter}} (<a href="#" (click)="service.increment()">Click to increment</a>)
     </p>
   `,
   styles: ``

@@ -2,8 +2,5 @@
     "name": "@my-project/main",
     "homepage": "/",
     "dependencies": {
-    },
-    "devDependencies": {
-        "@my-project/build": "*"
     }
 }

@@ -1,11 +1,15 @@
-const { withNativeFederation } = require('@angular-architects/native-federation/config');
-const { STANDARD_SHARED_MODULES, SHARED_MAPPINGS } = require('@my-project/build');
+const { withNativeFederation, shareAll } = require('@angular-architects/native-federation/config');
 
 const config = withNativeFederation({
   name: 'main-app',
-  shared: STANDARD_SHARED_MODULES,
+  shared: {
+    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto', eager: true }),
+    "@my-project/shared": { singleton: true, strictVersion: true, requiredVersion: 'auto', eager: true }
+  },
   skip: [],
-  sharedMappings: SHARED_MAPPINGS
+  sharedMappings: [
+    '@my-project/shared'
+  ]
 });
 
 console.log(config);
